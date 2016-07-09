@@ -61,5 +61,6 @@ Vagrant.configure(2) do |config|
     [[ -f /usr/bin/python ]] || (cd /usr/bin; ln -s python3.5 python)
     [[ -f /usr/bin/pip ]] || (cd /usr/bin; ln -s pip3.5 pip)
     type -fp django-admin || pip install django==1.9.7
+    rpm -q python3-mysql &>/dev/null &>/dev/null || dnf install -y python3-mysql
   SHELL
 end
