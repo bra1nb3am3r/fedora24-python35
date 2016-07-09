@@ -58,6 +58,12 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    type -fp mysql || (
+      dnf install -y mariadb-server
+      systemctl enable mariadb
+      systemctl start mariadb
+      mysqladmin -u root password vagrant
+    )
     [[ -f /usr/bin/python ]] || (cd /usr/bin; ln -s python3.5 python)
     [[ -f /usr/bin/pip ]] || (cd /usr/bin; ln -s pip3.5 pip)
     type -fp django-admin || pip install django==1.9.7
