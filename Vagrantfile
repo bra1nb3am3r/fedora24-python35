@@ -69,6 +69,6 @@ Vagrant.configure(2) do |config|
     type -fp bpython || pip install bpython
     type -fp ipython || pip install ipython
     type -fp django-admin || pip install django==1.9.7
-    rpm -q python3-mysql &>/dev/null &>/dev/null || dnf install -y python3-mysql
+    rpm -q python3-mysql &>/dev/null || dnf install -y python3-mysql
   SHELL
 end
