@@ -71,5 +71,7 @@ Vagrant.configure(2) do |config|
     type -fp django-admin || pip install django==1.9.7
     rpm -q python3-mysql &>/dev/null || dnf install -y python3-mysql
     rpm -q git &>/dev/null || dnf install -y git
+    rpm -q python3-devel &>/dev/null || dnf install -y python3-devel
+    rpm -q redhat-rpm-config &>/dev/null || dnf install -y redhat-rpm-config
   SHELL
 end
