@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
     done
     [[ -z "$packages" ]] || dnf install -y ${packages[@]}
 
-    type -fp mysql || (
+    type -fp mysql &>/dev/null || (
       dnf install -y mariadb-server
       systemctl enable mariadb
       systemctl start mariadb
@@ -74,8 +74,8 @@ Vagrant.configure(2) do |config|
     [[ -f /usr/bin/python ]] || (cd /usr/bin; ln -s python3.5 python)
     [[ -f /usr/bin/pip ]] || (cd /usr/bin; ln -s pip3.5 pip)
 
-    type -fp bpython || pip install bpython
-    type -fp ipython || pip install ipython
-    type -fp django-admin || pip install django==1.9.7
+    type -fp bpython &>/dev/null || pip install bpython
+    type -fp ipython &>/dev/null || pip install ipython
+    type -fp django-admin &>/dev/null || pip install django==1.9.7
   SHELL
 end
