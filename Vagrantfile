@@ -66,12 +66,15 @@ Vagrant.configure(2) do |config|
     )
     [[ -f /usr/bin/python ]] || (cd /usr/bin; ln -s python3.5 python)
     [[ -f /usr/bin/pip ]] || (cd /usr/bin; ln -s pip3.5 pip)
+
     type -fp bpython || pip install bpython
     type -fp ipython || pip install ipython
     type -fp django-admin || pip install django==1.9.7
-    rpm -q python3-mysql &>/dev/null || dnf install -y python3-mysql
-    rpm -q git &>/dev/null || dnf install -y git
-    rpm -q python3-devel &>/dev/null || dnf install -y python3-devel
-    rpm -q redhat-rpm-config &>/dev/null || dnf install -y redhat-rpm-config
+
+    declare -a packages
+    for package in "python3-devel python3-mysql git redhat-rpm-config";do
+      rpm -q $package || packages+=($package)
+    done
+    [[ -z "$packages" ]] || dnf install -y ${packages[@]}
   SHELL
 end
